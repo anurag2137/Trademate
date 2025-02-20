@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 // import 'package:flutter/material.dart';
 
-import 'auth/login.dart'; // Import the login page file
+import 'login_page/login.dart'; // Import the login page file
+=======
+
+import 'login_page/login.dart'; // Import the login page file
+>>>>>>> login page
 
 void main() {
   runApp(const MyApp());
@@ -23,4 +28,8 @@ class MyApp extends StatelessWidget {
       home: const LoginPage(), // Replace MyHomePage with LoginPage
     );
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> login page

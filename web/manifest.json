@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
     "name": "tradesmate",
     "short_name": "tradesmate",
+=======
+    "name": "login_page",
+    "short_name": "login_page",
+>>>>>>> login page
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

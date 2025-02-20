@@ -90,12 +90,21 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
+<<<<<<< HEAD
             VALUE "FileDescription", "tradesmate" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "tradesmate" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2025 com.example. All rights reserved." "\0"
             VALUE "OriginalFilename", "tradesmate.exe" "\0"
             VALUE "ProductName", "tradesmate" "\0"
+=======
+            VALUE "FileDescription", "login_page" "\0"
+            VALUE "FileVersion", VERSION_AS_STRING "\0"
+            VALUE "InternalName", "login_page" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2025 com.example. All rights reserved." "\0"
+            VALUE "OriginalFilename", "login_page.exe" "\0"
+            VALUE "ProductName", "login_page" "\0"
+>>>>>>> login page
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

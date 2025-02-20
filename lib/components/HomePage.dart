@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:login_page/component/profile.dart';
-
-
+import 'package:tradesmate/component/profilepage.dart';
+import '../login_page/login.dart';
+import 'dashboard.dart';
+// Import your login page
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
+
+  void _logout(BuildContext context) {
+    // Navigate to Login Page and remove all previous routes
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const LoginPage()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +65,15 @@ class HomePage extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const DashboardPage()),
+                  MaterialPageRoute(builder: (context) => DashboardPage()),
                 );
               },
+            ),
+            const Divider(), // Adds a separator before Logout
+            ListTile(
+              leading: const Icon(Icons.exit_to_app, color: Colors.red),
+              title: const Text("Logout", style: TextStyle(color: Colors.red)),
+              onTap: () => _logout(context), // Calls logout function
             ),
           ],
         ),
