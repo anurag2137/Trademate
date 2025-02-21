@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../component/homepage.dart';
 
-
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -38,6 +37,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true, // Allows content to move when keyboard appears
       body: Stack(
         children: [
           // Background Gradient
@@ -56,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
             top: 50,
             left: 20,
             child: Text(
-              "TRADEMATE",
+              "TRADESMATE",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -68,142 +68,150 @@ class _LoginPageState extends State<LoginPage> {
           ),
 
           // Login Form inside a Bottom Sheet
-          DraggableScrollableSheet(
-            initialChildSize: 0.55,
-            minChildSize: 0.55,
-            maxChildSize: 0.85,
-            builder: (context, scrollController) {
-              return Container(
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(40),
-                    topLeft: Radius.circular(40),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black26,
-                      blurRadius: 10,
-                      offset: Offset(0, -5),
-                    ),
-                  ],
-                ),
-                child: SingleChildScrollView(
-                  controller: scrollController,
-                  padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 24),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Title
-                      const Center(
-                        child: Text(
-                          "Welcome Back",
-                          style: TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.w700,
-                            color: Color(0xFF6A81F4),
-                            fontFamily: "Poppins",
-                          ),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              return AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: DraggableScrollableSheet(
+                  initialChildSize: 0.6,
+                  minChildSize: 0.55,
+                  maxChildSize: 0.85,
+                  builder: (context, scrollController) {
+                    return Container(
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(40),
+                          topLeft: Radius.circular(40),
                         ),
-                      ),
-                      const SizedBox(height: 30),
-
-                      // Username Field
-                      TextField(
-                        controller: _usernameController,
-                        decoration: InputDecoration(
-                          hintText: "Username",
-                          prefixIcon: Padding(
-                            padding: const EdgeInsets.all(14),
-                            child: SvgPicture.asset('assets/images/user.svg'),
-                          ),
-                          filled: true,
-                          fillColor: Colors.grey[100],
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(14),
-                            borderSide: BorderSide.none,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-
-                      // Password Field
-                      TextField(
-                        controller: _passwordController,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          hintText: "Password",
-                          prefixIcon: Padding(
-                            padding: const EdgeInsets.all(14),
-                            child: SvgPicture.asset('assets/images/password.svg'),
-                          ),
-                          filled: true,
-                          fillColor: Colors.grey[100],
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(14),
-                            borderSide: BorderSide.none,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 14),
-
-                      // Remember Me & Forgot Password
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Checkbox(
-                                value: isChecked,
-                                onChanged: (value) {
-                                  setState(() {
-                                    isChecked = value!;
-                                  });
-                                },
-                                activeColor: const Color(0xFF6A81F4),
-                              ),
-                              const Text("Remember Me"),
-                            ],
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              // Add forgot password logic here
-                            },
-                            child: const Text(
-                              "Forgot Password?",
-                              style: TextStyle(color: Color(0xFF6A81F4)),
-                            ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 10,
+                            offset: Offset(0, -5),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 30),
+                      child: SingleChildScrollView(
+                        controller: scrollController,
+                        padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 24),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Title
+                            const Center(
+                              child: Text(
+                                "Welcome Back",
+                                style: TextStyle(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF6A81F4),
+                                  fontFamily: "Poppins",
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 30),
 
-                      // Login Button
-                      SizedBox(
-                        width: double.infinity,
-                        height: 50,
-                        child: ElevatedButton(
-                          onPressed: _handleLogin,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF6A81F4),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(14),
+                            // Username Field
+                            TextField(
+                              controller: _usernameController,
+                              decoration: InputDecoration(
+                                hintText: "Username",
+                                prefixIcon: Padding(
+                                  padding: const EdgeInsets.all(14),
+                                  child: SvgPicture.asset('assets/images/user.svg'),
+                                ),
+                                filled: true,
+                                fillColor: Colors.grey[100],
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(14),
+                                  borderSide: BorderSide.none,
+                                ),
+                              ),
                             ),
-                            elevation: 5,
-                          ),
-                          child: const Text(
-                            "Login",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                            const SizedBox(height: 16),
+
+                            // Password Field
+                            TextField(
+                              controller: _passwordController,
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                hintText: "Password",
+                                prefixIcon: Padding(
+                                  padding: const EdgeInsets.all(14),
+                                  child: SvgPicture.asset('assets/images/password.svg'),
+                                ),
+                                filled: true,
+                                fillColor: Colors.grey[100],
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(14),
+                                  borderSide: BorderSide.none,
+                                ),
+                              ),
                             ),
-                          ),
+                            const SizedBox(height: 14),
+
+                            // Remember Me & Forgot Password
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Checkbox(
+                                      value: isChecked,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          isChecked = value!;
+                                        });
+                                      },
+                                      activeColor: const Color(0xFF6A81F4),
+                                    ),
+                                    const Text("Remember Me"),
+                                  ],
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    // Add forgot password logic here
+                                  },
+                                  child: const Text(
+                                    "Forgot Password?",
+                                    style: TextStyle(color: Color(0xFF6A81F4)),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 30),
+
+                            // Login Button
+                            SizedBox(
+                              width: double.infinity,
+                              height: 50,
+                              child: ElevatedButton(
+                                onPressed: _handleLogin,
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xFF6A81F4),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(14),
+                                  ),
+                                  elevation: 5,
+                                ),
+                                child: const Text(
+                                  "Login",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
+                    );
+                  },
                 ),
               );
             },
