@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../component/homepage.dart';
+
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -12,6 +15,25 @@ class _LoginPageState extends State<LoginPage> {
   bool isChecked = false;
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  void _handleLogin() {
+    String username = _usernameController.text.trim();
+    String password = _passwordController.text.trim();
+
+    if (username.isNotEmpty && password.isNotEmpty) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomePage()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please enter username and password'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -162,9 +184,7 @@ class _LoginPageState extends State<LoginPage> {
                         width: double.infinity,
                         height: 50,
                         child: ElevatedButton(
-                          onPressed: () {
-                            // Perform login action
-                          },
+                          onPressed: _handleLogin,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF6A81F4),
                             shape: RoundedRectangleBorder(
